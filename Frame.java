@@ -4,20 +4,18 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JComponent;
 import javax.swing.JButton;
-
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
+import java.util.List;
 
 public class Frame extends JFrame{
-    public double num1;
-    public double num2;
-    public double num3;
-    public double num4; 
-    protected ArrayList inputs;   
+    protected double num1;
+    protected double num2;
+    protected double num3;
+    protected double num4; 
 
     public Frame(){
         JPanel p = new JPanel();
@@ -28,17 +26,21 @@ public class Frame extends JFrame{
         setSize(550,550); 
 
         // TEXT FIELDS
-        JTextField jt = new JTextField("EXPENSE",10);
+        JTextField jt = new JTextField("CPU",10);
         JTextField jt2 = new JTextField();
-        JTextField jt3 = new JTextField("EXPENSE",10);
+        JTextField jt3 = new JTextField("GPU",10);
         JTextField jt4 = new JTextField();
-        JTextField jt5 = new JTextField("EXPENSE",10);
+        JTextField jt5 = new JTextField("RAM",10);
         JTextField jt6 = new JTextField();
-        JTextField jt7 = new JTextField("EXPENSE",10);
+        JTextField jt7 = new JTextField("Storage",10);
         JTextField jt8 = new JTextField();
         JTextField total = new JTextField("Total",10);
-        JTextField result = new JTextField();   
+        JTextField result = new JTextField();               
 
+        jt.setToolTipText("Edit me");
+        jt3.setToolTipText("Edit me");
+        jt5.setToolTipText("Edit me");
+        jt7.setToolTipText("Edit me");
         jt2.setToolTipText("Enter a number value");
         jt4.setToolTipText("Enter a number value");
         jt6.setToolTipText("Enter a number value");
@@ -63,12 +65,7 @@ public class Frame extends JFrame{
         jt7.setHorizontalAlignment(JTextField.CENTER);
         total.setHorizontalAlignment(JTextField.CENTER);
 
-        jt.setEditable(false);
-        jt3.setEditable(false);
-        jt5.setEditable(false);
-        jt7.setEditable(false);
-        total.setEditable(false);
-        
+               
         // BUTTON
         Font font = new Font("Comic Sans MS", Font.BOLD, 15);
         JButton calculate = new JButton("Calculate");
@@ -78,7 +75,12 @@ public class Frame extends JFrame{
         calculate.setFont(font);
         calculate.addActionListener(new ActionListener(){        
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent e) { 
+                num1 =0.0;     
+                num2 =0.0;       
+                num3 =0.0;       
+                num4 =0.0; 
+                result.setText("");                
                 try{
                     num1 = Double.parseDouble(jt2.getText());
                     num2 = Double.parseDouble(jt4.getText());
@@ -86,35 +88,29 @@ public class Frame extends JFrame{
                     num4 = Double.parseDouble(jt8.getText());
                     double x = num1+num2+num3+num4;
                     result.setText(String.valueOf(x));
-                }
-                catch(InputMismatchException ex){
-                    System.out.println(ex.getMessage());  
-                     if(jt2.getText() instanceof String){
-                        jt2.setBackground(Color.YELLOW);
-                     }
-                     else if(jt4.getText() instanceof String){
-                        jt4.setBackground(Color.YELLOW);
-                     }  
-                     else if(jt6.getText() instanceof String){
-                        jt6.setBackground(Color.YELLOW);
-                     }  
-                     else if(jt8.getText() instanceof String){
-                        jt8.setBackground(Color.YELLOW);
-                     }                                         
-                }
-                catch(NumberFormatException ex){
+                    jt2.setBackground(Color.white);
+                    jt4.setBackground(Color.white);
+                    jt6.setBackground(Color.white);
+                    jt8.setBackground(Color.white);
+                    result.setBackground(Color.white);
+                }                
+                catch(NumberFormatException ex){                    
                     System.out.println(ex.getMessage());                      
-                     if(jt2.getText() instanceof String){
+                    if(num1 == 0.0){
                         jt2.setBackground(Color.YELLOW);
+                        result.setBackground(Color.black);
                      }
-                     else if(jt4.getText() instanceof String){                         
+                     else if(num2 == 0.0){
                         jt4.setBackground(Color.YELLOW);
+                        result.setBackground(Color.black);
                      }  
-                     else if(jt6.getText() instanceof String){
+                     else if(num3 == 0.0){
                         jt6.setBackground(Color.YELLOW);
+                        result.setBackground(Color.black);
                      }  
-                     else if(jt8.getText() instanceof String){
+                     else if(num4 == 0.0){
                         jt8.setBackground(Color.YELLOW);
+                        result.setBackground(Color.black);
                      }                   
                 }                
             }
@@ -132,12 +128,8 @@ public class Frame extends JFrame{
         p.add(total);
         p.add(result);
         p.add(calculate);
-    }    
+    }
+    public boolean isDub(String x){
+        return x instanceof String;
+    }
 }
-
-// try {
-//     Thread.sleep(2000);
-//     jt2.setBackground(Color.WHITE);
-// } catch (InterruptedException exs) {
-//     System.out.println(exs.getMessage());
-// }  
