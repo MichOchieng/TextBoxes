@@ -9,7 +9,8 @@ import java.util.Scanner;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
+import javax.swing.KeyStroke;
+
 
 public class Frame extends JFrame{
     protected double num1;
@@ -26,26 +27,27 @@ public class Frame extends JFrame{
         setSize(550,550); 
 
         // TEXT FIELDS
-        JTextField jt = new JTextField("CPU",10);
+        JTextField jt = new JTextField("",10);
         JTextField jt2 = new JTextField();
-        JTextField jt3 = new JTextField("GPU",10);
+        JTextField jt3 = new JTextField("",10);
         JTextField jt4 = new JTextField();
-        JTextField jt5 = new JTextField("RAM",10);
+        JTextField jt5 = new JTextField("",10);
         JTextField jt6 = new JTextField();
-        JTextField jt7 = new JTextField("Storage",10);
+        JTextField jt7 = new JTextField("",10);
         JTextField jt8 = new JTextField();
         JTextField total = new JTextField("Total",10);
         JTextField result = new JTextField();               
 
-        jt.setToolTipText("Edit me");
-        jt3.setToolTipText("Edit me");
-        jt5.setToolTipText("Edit me");
-        jt7.setToolTipText("Edit me");
+        jt.setToolTipText("Enter text here");
+        jt3.setToolTipText("Enter text here");
+        jt5.setToolTipText("Enter text here");
+        jt7.setToolTipText("Enter text here");
         jt2.setToolTipText("Enter a number value");
         jt4.setToolTipText("Enter a number value");
         jt6.setToolTipText("Enter a number value");
         jt8.setToolTipText("Enter a number value");
         result.setToolTipText("This is your total");
+        total.setEditable(false);
         // JTF - Positioning
         jt.setBounds(100,150,100,20);
         jt2.setBounds(200,150,150,20); 
@@ -59,6 +61,10 @@ public class Frame extends JFrame{
         result.setBounds(200,270,150,20);
 
         // JTF - Text Positioning
+        jt2.setHorizontalAlignment(JTextField.CENTER);
+        jt4.setHorizontalAlignment(JTextField.CENTER);
+        jt6.setHorizontalAlignment(JTextField.CENTER);
+        jt8.setHorizontalAlignment(JTextField.CENTER);
         jt.setHorizontalAlignment(JTextField.CENTER);
         jt3.setHorizontalAlignment(JTextField.CENTER);
         jt5.setHorizontalAlignment(JTextField.CENTER);
@@ -68,6 +74,7 @@ public class Frame extends JFrame{
                
         // BUTTON
         Font font = new Font("Comic Sans MS", Font.BOLD, 15);
+        
         JButton calculate = new JButton("Calculate");
         calculate.setToolTipText("What are you waiting for, click me!");
         calculate.setBounds(150,300,140,50);
@@ -76,10 +83,10 @@ public class Frame extends JFrame{
         calculate.addActionListener(new ActionListener(){        
             @Override
             public void actionPerformed(ActionEvent e) { 
-                num1 =0.0;     
-                num2 =0.0;       
-                num3 =0.0;       
-                num4 =0.0; 
+                num1 =0;     
+                num2 =0;       
+                num3 =0;       
+                num4 =0; 
                 result.setText("");                
                 try{
                     num1 = Double.parseDouble(jt2.getText());
@@ -97,20 +104,36 @@ public class Frame extends JFrame{
                 catch(NumberFormatException ex){                    
                     System.out.println(ex.getMessage());                      
                     if(num1 == 0.0){
-                        jt2.setBackground(Color.YELLOW);
-                        result.setBackground(Color.black);
+                        jt2.setBackground(Color.white);
+                        jt4.setBackground(Color.white);
+                        jt6.setBackground(Color.white);
+                        jt8.setBackground(Color.white);
+                        jt2.setBackground(Color.red);
+                        result.setBackground(Color.black);                        
                      }
                      else if(num2 == 0.0){
-                        jt4.setBackground(Color.YELLOW);
-                        result.setBackground(Color.black);
+                        jt2.setBackground(Color.white);
+                        jt4.setBackground(Color.white);
+                        jt6.setBackground(Color.white);
+                        jt8.setBackground(Color.white);
+                        jt4.setBackground(Color.red);
+                        result.setBackground(Color.black);                        
                      }  
                      else if(num3 == 0.0){
-                        jt6.setBackground(Color.YELLOW);
-                        result.setBackground(Color.black);
+                        jt2.setBackground(Color.white);
+                        jt4.setBackground(Color.white);
+                        jt6.setBackground(Color.white);
+                        jt8.setBackground(Color.white);
+                        jt6.setBackground(Color.red);
+                        result.setBackground(Color.black);                        
                      }  
                      else if(num4 == 0.0){
-                        jt8.setBackground(Color.YELLOW);
-                        result.setBackground(Color.black);
+                        jt2.setBackground(Color.white);
+                        jt4.setBackground(Color.white);
+                        jt6.setBackground(Color.white);
+                        jt8.setBackground(Color.white);
+                        jt8.setBackground(Color.red);
+                        result.setBackground(Color.black);                        
                      }                   
                 }                
             }
@@ -129,7 +152,5 @@ public class Frame extends JFrame{
         p.add(result);
         p.add(calculate);
     }
-    public boolean isDub(String x){
-        return x instanceof String;
-    }
+    
 }
